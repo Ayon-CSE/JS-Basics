@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>htnml Events</title>
+  </head>
+  <body style="background-color: #414141; color: aliceblue">
+    <h2>Amazing image</h2>
+    <div>
+      <ul id="images">
+        <li>
+          <img
+            width="200px"
+            id="photoshop"
+            src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt="photoshop"
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="japan"
+            src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="river"
+            src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="owl"
+            src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="prayer"
+            src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <a style="color: aliceblue" href="https://google.com" id="google"
+            >Google</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    document.querySelector("#owl").onclick = function () {
+      alert("Owl clicked");
+    };
+
+    // addEventListener method is more flexible and allows us to add multiple event listeners to the same element without overwriting existing ones.
+    document.querySelector("#owl").addEventListener(
+      "click",
+      function (e) {
+        alert("Owl clicked");
+        console.log(e);
+      },
+      false,
+    );
+
+    document.querySelector("#images").addEventListener(
+      "click",
+      function (e) {
+        console.log("clicked inside of image");
+      },
+      false,
+    ); // false - queue (bubbling phase),
+    // true - stack (capturing phase)
+
+    document.querySelector("#owl").addEventListener(
+      "click",
+      function (e) {
+        console.log("Owl clicked");
+        e.stopPropagation(); // stop the event from bubbling up to parent elements, bairer keu ashbe na
+      },
+      false,
+    );
+
+    document.querySelector("#google").addEventListener(
+      "click",
+      function (e) {
+        e.preventDefault(); // prevent the default action of the event, in this case, it will prevent the link from being followed when clicked
+        console.log("google clicked");
+      },
+      false,
+    );
+
+    // type, timestamp, defaultPrevented, target, srcElement, toElement, currentTarget, eventPhase, bubbles, cancelable, etc.
+    // clientX, clientY, pageX, pageY, screenX, screenY, etc.
+    // altKey, ctrlKey, shiftKey, keyCode, metaKey, button, buttons, etc.
+
+    // attachEvent() is an older method used in Internet Explorer to attach event handlers to elements. It is not standard and should be avoided in modern web development. Instead, use addEventListener() for better compatibility and functionality.
+
+    // task : jkhn ami images click korbo, shei image gayeb hoye jabe
+    document.querySelector("#images").addEventListener(
+      "click",
+      function (e) {
+        console.log(e.target.parentNode); // sudhu image remove hole to li er bullet point theke jabe jeta to hoy na tai image er parent node remove li remove korbo
+        console.log(e.target.tagName); // tagName property returns the tag name of the element in uppercase letters. It is used to identify the type of HTML element that was clicked or interacted with in an event handler.
+        let removeElement = e.target.parentNode;
+        removeElement.remove(); // conditon na dile jekhane click kori tar parent node gayeb hoye jabe jeta somossha create korbe, tai condition diye check korbo jodi click kora element ta image hoy taholei remove korbo
+
+        if (e.target.tagName === "IMG") {
+          console.log(e.target.id);
+
+          let removeElement = e.target.parentNode;
+          removeElement.remove();
+        }
+
+        // alternatives to remove() method:
+        // removeElement.parentNode.removeChild(removeElement); // remove() method is a modern way to remove an element from the DOM
+        removeElement.parentNode.removeChild(removeElement); // removeChild() method removes a child node from the DOM and returns the removed node. It is used to remove an element from its parent node in the DOM tree.
+      },
+      false,
+    );
+  </script>
+</html>

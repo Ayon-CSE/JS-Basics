@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom Part 4</title>
+  </head>
+  <body style="background-color: black; color: white">
+    <ul class="language">
+      <li>JavaScript</li>
+    </ul>
+  </body>
+  <script>
+    function fun(x) {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(x));
+      document.querySelector(".language").appendChild(li);
+    }
+    for(let i = 1; i <= 5; i++) {
+      fun(i);
+    }
+
+    // Edit
+    const secondli = document.querySelector('.language');
+    const ans = secondli.querySelector('li:nth-child(2)');
+    
+    const newLi = document.createElement('li');
+    newLi.textContent = "Pyhton";
+    ans.replaceWith(newLi);
+   
+    // Remove
+    const c = document.querySelector('.language');
+    const lastli = c.querySelector('li:last-child');
+    c.removeChild(lastli);
+
+    const fourthli = c.querySelector('li:nth-child(5)');
+    fourthli.remove();
+
+  </script>
+</html>
