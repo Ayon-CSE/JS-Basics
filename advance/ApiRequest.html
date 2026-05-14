@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .ulala {
+        background-color: black;
+        color: red;
+        border-color: purple;
+        border-width: 5px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="ulala">
+      <tr>
+        <th>readyState</th>
+        <th>State</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>UNSENT</td>
+        <td>Client has been created. open() not called yet.</td>
+      </tr>
+
+      <tr>
+        <td>1</td>
+        <td>OPENED</td>
+        <td>open() has been called.</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>HEADERS_RECEIVED</td>
+        <td>send() has been called, and headers and status are available.</td>
+      </tr>
+
+      <tr>
+        <td>3</td>
+        <td>LOADING</td>
+        <td>Downloading; responseText holds partial data.</td>
+      </tr>
+
+      <tr>
+        <td>4</td>
+        <td>DONE</td>
+        <td>The operation is complete.</td>
+      </tr>
+    </table>
+  </body>
+
+  <script>
+    let requestUrl = "https://api.github.com/users/Ayon-CSE"; // URL of the API endpoint you want to access. In this case, it's the GitHub API endpoint for a specific user.
+    let a = new XMLHttpRequest(); // XMLHttpRequest name to the API
+    // request  object used to interact with servers. You can retrieve data from a URL without having to do a full page refresh. This makes it ideal for implementing dynamic, interactive web applications.
+
+    a.open("GET", requestUrl); // Initializes a newly-created request, or re-initializes an existing one. In this case, it sets the HTTP method to 'GET' and the URL to the specified API endpoint.
+
+    a.onreadystatechange = function () {
+      // Logs the current readyState of the request to the console. The readyState property holds the status of the XMLHttpRequest. It can have values from 0 to 4, where each value represents a different stage of the request lifecycle.
+
+      if (a.readyState == 4) {
+        if (a.status === 200) {
+          let data = JSON.parse(this.responseText); // Parses the responseText as JSON and assigns it to the variable 'data'. The JSON.parse() method converts a JSON string into a JavaScript object. In this case, it converts the JSON response from the GitHub API into a JavaScript object that can be easily accessed and manipulated.
+          console.log("Response Data:", data);
+          console.log("Followers:", data.followers);
+        } else {
+          console.log("Error: Status", a.status);
+          console.log("Response:", this.responseText);
+        }
+        // If the readyState is 4 (DONE), it logs the responseText to the console. The responseText property contains the response data as a string. In this case, it will log the JSON response from the GitHub API for the specified user.
+      }
+    };
+
+    a.send(); // Sends the request to the server. In this case, it sends the GET request to the specified API endpoint.
+  </script>
+</html>
