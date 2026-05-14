@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Ayon </h1>
+    <button id = "stop"> Stop </button>
+</body>
+
+<script>
+    // setTimeout(function() mane kono function ke ekta specific time por call kore. Ekhane 2000 mane 2 second por function ta call hobe.
+    setTimeout(function() {
+        console.log('Ayon');
+    }, 2000);// milisecond
+
+    let sayAyon = function() {
+        console.log('Ayon');
+    }
+    setTimeout(sayAyon, 3000); // handler function ke alada kore declare kore setTimeout e pass kora jay. Ekhane 3000 mane 3 second por function ta call hobe.
+
+    let changeText = function() {
+        document.querySelector('h1').innerText = 'Mishkat';
+    }
+    let timeoutId = setTimeout(changeText, 4000); // Ekhane 4000 mane 4 second por function ta call hobe.
+
+    // ami jodi stop button click kori, timeout function ta stop hoye jabe. Ekhane clearTimeout function ke use kore timeout function ta stop kora jay.
+    document.querySelector('#stop').addEventListener('click', function() {
+        clearTimeout(timeoutId); // Ekhane changeText function ta stop hoye jabe when button is clicked. direct function ke clearTimeout e pass kora jay na, tai amra timeoutId variable e setTimeout function ta store korechi, jeta changeText function ke call kore. Ekhane timeoutId ke clearTimeout e pass kore changeText function ta stop kora jay.
+        console.log('STOPPED');
+        
+    }, false);
+
+    // setInterval function ta specific time por por function ke call kore. Ekhane 1000 mane 1 second por por function ta call hobe.
+</script>
+</html>

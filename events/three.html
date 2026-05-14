@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Ayon </h1>
+    <button id = "stop"> Stop </button>
+    <button id = "start"> Start </button>
+</body>
+
+<script>
+    let sayDate = function() {
+        console.log('Ayon', Date.now());
+    }
+
+    let id = setInterval(sayDate, 1000); // Ekhane 1000 mane 1 second por por function ta call hobe.
+
+    let sayDate2 = function(s) {
+        console.log(s, Date.now());
+    }
+
+    let id2 = setInterval(sayDate2, 1000, 'Mishkat'); // Ekhane 1000 mane 1 second por por function ta call hobe.
+
+    clearInterval(id); // Ekhane id variable e setInterval function ta store korechi, jeta sayDate function ke call kore. Ekhane id ke clearInterval e pass kore sayDate function ta stop kora jay.
+    clearInterval(id2);
+
+    // Task : jkhn start button click hobe, sayDate function ta start hoye jabe. abr stop button click hobe, sayDate function ta stop hoye jabe.
+    document.querySelector('#start').addEventListener('click', function() {
+         id = setInterval(sayDate, 1000); 
+    }, false);
+
+     document.querySelector('#stop').addEventListener('click', function() {
+         clearInterval(id);
+    }, false);
+</script>
+</html>
